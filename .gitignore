@@ -31,6 +31,9 @@
 *.out
 *.app
 
+# VS Code files
+.vscode/
+
 # Main files that help me understand
 # how OpenGL vertex array buffers work
 main_vao.cpp

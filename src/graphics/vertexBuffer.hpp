@@ -15,7 +15,7 @@ struct Vertex
 class VertexBuffer
 {
     private:
-        unsigned int mRendererID;
+        unsigned int _rendererID;
 
     public:
         VertexBuffer(std::vector<Vertex>& vertices);

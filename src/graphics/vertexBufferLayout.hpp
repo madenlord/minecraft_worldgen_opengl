@@ -53,22 +53,22 @@ namespace pushtemp
 class VertexBufferLayout
 {
     private:
-        std::vector<VertexBufferElement> mElements;
-        unsigned int mStride;
+        std::vector<VertexBufferElement> _elements;
+        unsigned int _stride;
 
     public:
         VertexBufferLayout()
-            : mStride(0) {}
+            : _stride(0) {}
         
         
         template<typename T>
         void push(unsigned int count)
         {
-            pushtemp::push<T>(count, mElements, &mStride);
+            pushtemp::push<T>(count, _elements, &_stride);
         }
         
-        const std::vector<VertexBufferElement> getElements() const { return mElements; }
-        unsigned int getStride() const { return mStride; } 
+        const std::vector<VertexBufferElement> getElements() const { return _elements; }
+        unsigned int getStride() const { return _stride; } 
 };
 
 #endif
