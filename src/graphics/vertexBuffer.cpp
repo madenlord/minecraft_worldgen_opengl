@@ -2,11 +2,11 @@
 
 #include "vertexBuffer.hpp"
 
-VertexBuffer::VertexBuffer(std::vector<Vertex>& data)
+VertexBuffer::VertexBuffer(std::vector<Vertex>& vertices)
 {
     glGenBuffers(1, &mRendererID);
     glBindBuffer(GL_ARRAY_BUFFER, mRendererID);
-    glBufferData(GL_ARRAY_BUFFER, data.size() * sizeof(Vertex), data.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 }
 
 VertexBuffer::~VertexBuffer()
