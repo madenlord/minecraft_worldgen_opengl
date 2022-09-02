@@ -3,6 +3,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 #include <iostream>
+#include <vector>
 
 #include "window.hpp"
 #include "input.hpp"
@@ -30,13 +31,12 @@ int main(void)
      * ===================================================================
      */
 
-    float vertices[] = 
+    std::vector<Vertex> vertices = 
     {
-        /* Position */              /* Text coords*/
-        -50.0f, -50.0f, -100.0f,      0.0f, 0.0f,      // 0
-        50.0f, -50.0f, -100.0f,      1.0f, 0.0f,      // 1
-        50.0f, 50.0f, -100.0f,      1.0f, 1.0f,      // 2
-        -50.0f, 50.0f, -100.0f,      0.0f, 1.0f       // 3
+        Vertex{glm::vec3(-50.0f, -50.0f, -100.0f), glm::vec2(0.0f, 0.0f)},
+        Vertex{glm::vec3(50.0f, -50.0f, -100.0f), glm::vec2(1.0f, 0.0f)},
+        Vertex{glm::vec3(50.0f, 50.0f, -100.0f), glm::vec2(1.0f, 1.0f)},
+        Vertex{glm::vec3(-50.0f, 50.0f, -100.0f), glm::vec2(0.0f, 1.0f)}
     };
 
     unsigned int indices[] = 
@@ -47,7 +47,7 @@ int main(void)
 
     VertexArray vao;
 
-    VertexBuffer vbo((const void*)vertices, 4 * 5 * sizeof(float)); 
+    VertexBuffer vbo(vertices); 
 
     VertexBufferLayout layout;
     layout.push<float>(3);
