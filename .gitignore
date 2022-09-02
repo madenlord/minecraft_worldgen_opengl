@@ -31,5 +31,10 @@
 *.out
 *.app
 
+# Main files that help me understand
+# how OpenGL vertex array buffers work
+main_vao.cpp
+main_no_vao.cpp
+
 # /out (build directory)
 out/*
