@@ -9,38 +9,38 @@
 class Window 
 {
     private:
-        GLFWwindow* mWindow;
-        unsigned int mWidth;
-        unsigned int mHeight;
-        const char* mTitle;
+        GLFWwindow* _window;
+        unsigned int _width;
+        unsigned int _height;
+        const char* _title;
 
         /* 
          * Delta time variables, being Delta time the time between current
          * frame and last frame
          */
-        float mDeltaTime;
-        float mCurrentFrame;
-        float mLastFrame;
+        float _deltaTime;
+        float _currentFrame;
+        float _lastFrame;
 
     public:
         Window(unsigned int width, unsigned int height, const char* title)
-            : mWidth(width), mHeight(height), mTitle(title),
-              mDeltaTime(0.0f), mLastFrame(0.0f) {};
+            : _width(width), _height(height), _title(title),
+              _deltaTime(0.0f), _lastFrame(0.0f) {};
         ~Window();
 
         /* Window and frame operations */
         int init();
         void updateDeltaTime();
-        unsigned char windowShouldClose() const { return glfwWindowShouldClose(mWindow); }
-        void swapBuffers() const { glfwSwapBuffers(mWindow); }
+        unsigned char windowShouldClose() const { return glfwWindowShouldClose(_window); }
+        void swapBuffers() const { glfwSwapBuffers(_window); }
         void pollEvents() const { glfwPollEvents(); }
         
         /* Getters & Setters */
-        GLFWwindow* getGLFWwindow() const { return mWindow; }
-        unsigned int getWidth() const { return mWidth; }
-        unsigned int getHeight() const { return mHeight; } 
-        std::string getTitle() const { return mTitle; }
-        float getDeltaTime() const { return mDeltaTime; }
+        GLFWwindow* getGLFWwindow() const { return _window; }
+        unsigned int getWidth() const { return _width; }
+        unsigned int getHeight() const { return _height; } 
+        std::string getTitle() const { return _title; }
+        float getDeltaTime() const { return _deltaTime; }
 };
 
 #endif

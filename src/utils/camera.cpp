@@ -5,7 +5,7 @@
 
 void Camera::processInput(Window& window, Input& input)
 {
-    float cameraSpeed = mSpeed * window.getDeltaTime();
+    float cameraSpeed = _speed * window.getDeltaTime();
 
     /* If ESCAPE is pressed, the window is closed */
     if(input.isKeyPressed(GLFW_KEY_ESCAPE))
@@ -19,33 +19,33 @@ void Camera::processInput(Window& window, Input& input)
     double xpos;
     double ypos;
     if(input.isMouseMoving(&xpos, &ypos))
-        mForward = input.calculateCursorDirection(xpos, ypos);
+        _forward = input.calculateCursorDirection(xpos, ypos);
     
     /* Basic WASD input */
     if(input.isKeyPressed(GLFW_KEY_W))     // Move forward
-        mPosition += cameraSpeed * mForward;
+        _position += cameraSpeed * _forward;
     if(input.isKeyPressed(GLFW_KEY_S))     // Move back
-        mPosition -= cameraSpeed * mForward;
+        _position -= cameraSpeed * _forward;
     if(input.isKeyPressed(GLFW_KEY_A))     // Move left
-        mPosition -= glm::normalize(glm::cross(mForward, mUp)) * cameraSpeed;
+        _position -= glm::normalize(glm::cross(_forward, _up)) * cameraSpeed;
     if(input.isKeyPressed(GLFW_KEY_D))     // Move right
-        mPosition += glm::normalize(glm::cross(mForward, mUp)) * cameraSpeed;
+        _position += glm::normalize(glm::cross(_forward, _up)) * cameraSpeed;
 
     /* Up & Down (flying) input */
     if(input.isKeyPressed(GLFW_KEY_SPACE)) // Move up
-        mPosition += cameraSpeed * mUp;
+        _position += cameraSpeed * _up;
     if(input.isKeyPressed(GLFW_KEY_LEFT_CONTROL))
-        mPosition -= cameraSpeed * mUp;
+        _position -= cameraSpeed * _up;
 }
 
 void Camera::recalculateViewMatrix()
 {
-    mView           = glm::lookAt(mPosition, mPosition + mForward, mUp);
-    mViewProjection = mProjection * mView;
+    _view           = glm::lookAt(_position, _position + _forward, _up);
+    _viewProjection = _projection * _view;
 }
 
 glm::mat4& Camera::getViewProjection()
 {
     recalculateViewMatrix();
-    return mViewProjection;
+    return _viewProjection;
 }

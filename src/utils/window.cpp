@@ -23,15 +23,15 @@ int Window::init()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    mWindow = glfwCreateWindow(mWidth, mHeight, mTitle, NULL, NULL);
-    if (!mWindow)
+    _window = glfwCreateWindow(_width, _height, _title, NULL, NULL);
+    if (!_window)
     {
         glfwTerminate();
         return -1;
     }
 
     /* Make the window's context current */
-    glfwMakeContextCurrent(mWindow);
+    glfwMakeContextCurrent(_window);
 
     if(!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) 
     {
@@ -40,14 +40,14 @@ int Window::init()
     }
 
     /* We disable mouse cursor whenever we are inside the window */
-    glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetInputMode(_window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     return 0;
 }
 
 void Window::updateDeltaTime() 
 {
-    mCurrentFrame = glfwGetTime();
-    mDeltaTime = mCurrentFrame - mLastFrame;
-    mLastFrame = mCurrentFrame;
+    _currentFrame = glfwGetTime();
+    _deltaTime = _currentFrame - _lastFrame;
+    _lastFrame = _currentFrame;
 }
