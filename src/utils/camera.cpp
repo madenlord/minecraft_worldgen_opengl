@@ -1,7 +1,18 @@
 #include "glm/matrix.hpp"
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "camera.hpp"
+
+Camera::Camera(float fovY, float aspectRatio, float near, float far)
+                : _fovY(fovY), _aspectRatio(aspectRatio), _near(near), _far(far),
+                  _view(glm::lookAt(_position, _position + _forward, _up)),
+                  _projection(glm::perspective(glm::radians(_fovY), _aspectRatio, _near, _far)),
+                  _viewProjection(_projection * _view) 
+{
+    glClearDepth(1.0f);
+    glEnable(GL_DEPTH_TEST);
+}
 
 void Camera::processInput(Window& window, Input& input)
 {

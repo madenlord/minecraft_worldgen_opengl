@@ -33,16 +33,64 @@ int main(void)
 
     std::vector<Vertex> vertices = 
     {
-        Vertex{glm::vec3(-50.0f, -50.0f, -100.0f), glm::vec2(0.0f, 0.0f)},
-        Vertex{glm::vec3(50.0f, -50.0f, -100.0f), glm::vec2(1.0f, 0.0f)},
-        Vertex{glm::vec3(50.0f, 50.0f, -100.0f), glm::vec2(1.0f, 1.0f)},
-        Vertex{glm::vec3(-50.0f, 50.0f, -100.0f), glm::vec2(0.0f, 1.0f)}
+        /* Position */                        /* Texture coords */ 
+
+        // Front face
+        Vertex{glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},   // 0 (down left)
+        Vertex{glm::vec3(0.5f, -0.5f, 0.5f), glm::vec2(1.0f, 0.0f)},    // 1 (down right)
+        Vertex{glm::vec3(0.5f, 0.5f, 0.5f), glm::vec2(1.0f, 1.0f)},     // 2 (up right)
+        Vertex{glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 1.0f)},    // 3 (up left)
+
+        // Left face
+        Vertex{glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 0.0f)},   // 4 (down left)
+        Vertex{glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(1.0f, 0.0f)},    // 5 (down right)
+        Vertex{glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(1.0f, 1.0f)},     // 6 (up right)
+        Vertex{glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},    // 7 (up left)
+
+        // Right face
+        Vertex{glm::vec3(0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},   // 8 (down left)
+        Vertex{glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},    // 9 (down right)
+        Vertex{glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},     // 10 (up right)
+        Vertex{glm::vec3(0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 1.0f)},    // 11 (up left)
+
+        // Bottom face
+        Vertex{glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},   // 12 (down left)
+        Vertex{glm::vec3(0.5f, -0.5f, 0.5f), glm::vec2(1.0f, 0.0f)},    // 13 (down right)
+        Vertex{glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},     // 14 (up right)
+        Vertex{glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},    // 15 (up left)
+
+        // Back face
+        Vertex{glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 0.0f)},   // 16 (down left)
+        Vertex{glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},    // 17 (down right)
+        Vertex{glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},     // 18 (up right)
+        Vertex{glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},    // 19 (up left)
+
+        // Top face
+        Vertex{glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},   // 20 (down left)
+        Vertex{glm::vec3(0.5f, 0.5f, 0.5f), glm::vec2(1.0f, 0.0f)},    // 21 (down right)
+        Vertex{glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},     // 22 (up right)
+        Vertex{glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},    // 23 (up left)
     };
 
-    unsigned int indices[] = 
+    std::vector<unsigned int> indices = 
     {
         0, 1, 2, 
-        2, 3, 0 
+        2, 3, 0,
+
+        4, 5, 6,
+        6, 7, 4,
+
+        8, 9, 10, 
+        10, 11, 8,
+
+        12, 13, 14,
+        14, 15, 12,
+
+        16, 17, 18,
+        18, 19, 16,
+
+        20, 21, 22,
+        22, 23, 20
     };
 
     VertexArray vao;
@@ -54,10 +102,10 @@ int main(void)
     layout.push<float>(2);
     vao.addBuffer(vbo, layout);
 
-    IndexBuffer ibo(indices, 6);
+    IndexBuffer ibo(indices);
 
     /* Camera */
-    Camera camera(90.0f, (float)(window.getWidth()/window.getHeight()), 0.01f, 1000.0f);
+    Camera camera(90.0f, (float)window.getWidth()/(float)window.getHeight(), 0.01f, 1000.0f);
 
     /* Shader */
     Shader shader("../res/shaders/Basic.shader");

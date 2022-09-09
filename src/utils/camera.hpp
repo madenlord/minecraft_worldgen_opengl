@@ -11,7 +11,7 @@ class Camera
 {
     private:
         /* Position & Orientation of the camera */
-        glm::vec3 _position = glm::vec3(0.0f, 0.0f, 3.0f);
+        glm::vec3 _position = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::vec3 _forward  = glm::vec3(0.0f, 0.0f, -1.0f);
         glm::vec3 _up       = glm::vec3(0.0f, 1.0f, 0.0f);
 
@@ -22,18 +22,14 @@ class Camera
         float _far;
 
         /* Camera movement attributes */
-        float _speed = 100.0f;
+        float _speed = 5.0f;
 
         glm::mat4 _view;
         glm::mat4 _projection;
         glm::mat4 _viewProjection;
 
     public:
-        Camera(float fovY, float aspectRatio, float near, float far)
-            : _fovY(fovY), _aspectRatio(aspectRatio), _near(near), _far(far),
-              _view(glm::lookAt(_position, _position + _forward, _up)),
-              _projection(glm::perspective(glm::radians(_fovY), _aspectRatio, _near, _far)),
-              _viewProjection(_projection * _view) {} 
+        Camera(float fovY, float aspectRatio, float near, float far);
         ~Camera() {}
 
         void processInput(Window& window, Input& input);

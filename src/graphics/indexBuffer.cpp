@@ -2,12 +2,12 @@
 
 #include "indexBuffer.hpp"
 
-IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count)
-    : _count(count), _rendererID(0)
+IndexBuffer::IndexBuffer(const std::vector<unsigned int>& indices)
+    : _count(indices.size()), _rendererID(0)
 {
     glGenBuffers(1, &_rendererID);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _rendererID);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * sizeof(GL_UNSIGNED_INT), data, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, _count * sizeof(GL_UNSIGNED_INT), indices.data(), GL_STATIC_DRAW);
 }
 
 IndexBuffer::~IndexBuffer()
