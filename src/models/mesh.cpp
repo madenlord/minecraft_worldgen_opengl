@@ -26,13 +26,11 @@ Mesh::~Mesh()
 void Mesh::bind() const
 {
     _vao->bind();
-    _vbo->bind();
     _ibo->bind();
 }
 
 void Mesh::unbind() const
 {
     _vao->unbind();
-    _vbo->unbind();
     _ibo->unbind();
 }
